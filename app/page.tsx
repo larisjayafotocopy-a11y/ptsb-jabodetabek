@@ -20,14 +20,14 @@ export default function Home() {
           <div className="w-full h-80 md:h-[450px] bg-blue-50 rounded-2xl border border-gray-300 flex items-center justify-center relative mb-10 overflow-hidden shadow-inner">
               <div className="text-center z-10">
                   <p className="text-gray-600 font-bold text-xl">[ Area Peta JABODETABEK Interaktif ]</p>
-                  <p className="text-sm text-gray-500 mt-2">Pilih area Cabang untuk melihat data keluarga</p>
+                  <p className="text-sm text-gray-500 mt-2">Pilih area Korwil untuk melihat data keluarga</p>
               </div>
               
               {/* Pin Dummy Peta */}
-              <div className="absolute top-1/4 left-1/3 bg-batakRed text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg cursor-pointer hover:bg-batakDark transition transform hover:scale-110">Cab. Jakarta Timur</div>
-              <div className="absolute top-1/2 right-1/4 bg-batakRed text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg cursor-pointer hover:bg-batakDark transition transform hover:scale-110">Cab. Bekasi</div>
-              <div className="absolute bottom-1/4 left-1/4 bg-batakRed text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg cursor-pointer hover:bg-batakDark transition transform hover:scale-110">Cab. Depok</div>
-              <div className="absolute top-1/3 left-1/6 bg-batakRed text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg cursor-pointer hover:bg-batakDark transition transform hover:scale-110">Cab. Tangerang</div>
+              <div className="absolute top-1/4 left-1/3 bg-batakRed text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg cursor-pointer hover:bg-batakDark transition transform hover:scale-110">Korwil Jakarta Timur</div>
+              <div className="absolute top-1/2 right-1/4 bg-batakRed text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg cursor-pointer hover:bg-batakDark transition transform hover:scale-110">Korwil Bekasi</div>
+              <div className="absolute bottom-1/4 left-1/4 bg-batakRed text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg cursor-pointer hover:bg-batakDark transition transform hover:scale-110">Korwil Depok</div>
+              <div className="absolute top-1/3 left-1/6 bg-batakRed text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg cursor-pointer hover:bg-batakDark transition transform hover:scale-110">Korwil Tangerang</div>
           </div>
 
           {/* Kotak Pencarian Mengambang */}
