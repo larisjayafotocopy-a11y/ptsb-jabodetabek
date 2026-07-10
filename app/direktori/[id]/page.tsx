@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/auth';
 import PengurusSection from '@/components/PengurusSection';
 import Link from 'next/link';
 

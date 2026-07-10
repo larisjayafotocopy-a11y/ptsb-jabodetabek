@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import NavAuthButton from './NavAuthButton';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +15,7 @@ export default function Navbar() {
             <h1 className="font-bold text-lg leading-none">PTSB</h1>
           </div>
         </div>
-        
+
         {/* Menu Utama Desktop */}
         <div className="hidden md:flex items-center space-x-6 font-medium">
           <a href="/" className="hover:text-batakGold transition">Beranda</a>
@@ -24,15 +25,13 @@ export default function Navbar() {
           <a href="/galeri" className="hover:text-batakGold transition">Galeri</a>
         </div>
 
-        {/* Tombol Login */}
+        {/* Tombol Login/Logout */}
         <div className="hidden md:block">
-          <button className="bg-white text-batakRed px-5 py-2 rounded-md font-bold hover:bg-gray-200 transition">
-            Login
-          </button>
+          <NavAuthButton />
         </div>
 
         {/* TOMBOL HAMBURGER - FUNGSI KLIK DIPERBAIKI */}
-        <button 
+        <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-2xl p-2"
         >
@@ -49,7 +48,7 @@ export default function Navbar() {
             <a href="/tarombo" className="hover:text-batakGold">Tarombo</a>
             <a href="/berita" className="hover:text-batakGold">Berita & Ulaon</a>
             <a href="/galeri" className="hover:text-batakGold">Galeri</a>
-            <button className="bg-white text-batakRed py-2 rounded-md font-bold">Login</button>
+            <NavAuthButton mobile />
           </div>
         </div>
       )}

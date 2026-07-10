@@ -1,5 +1,5 @@
 export const dynamic = 'force-dynamic';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/auth';
 import Link from 'next/link';
 
 export default async function DirektoriPage() {
