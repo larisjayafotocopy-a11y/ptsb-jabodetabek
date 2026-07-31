@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/auth';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { DEFAULT_AVATAR } from '@/lib/constants';
 
 export default async function ProfilKeluargaPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -15,7 +16,10 @@ export default async function ProfilKeluargaPage({ params }: { params: Promise<{
   if (error || !k) notFound();
 
   // Memastikan link WhatsApp aman
-  const waLink = k.no_telp ? `https://wa.me/${k.no_telp.toString().replace(/^0/, '62')}` : "#";
+  // Kolom asli di tabel keluarga adalah `no_telp` (dikonfirmasi lewat information_schema).
+  const waLink = k.no_telp
+    ? `https://wa.me/${k.no_telp.toString().replace(/^0/, '62')}`
+    : '#';
 
   // Membuat link kembali yang dinamis berdasarkan data asli
   const linkKembali = k.korwil_id && k.marga_id 
@@ -34,7 +38,7 @@ export default async function ProfilKeluargaPage({ params }: { params: Promise<{
         <div className="flex justify-center -mt-4 mb-6">
           <div className="w-32 h-32 rounded-full border-4 border-gray-50 shadow-md overflow-hidden">
             <img 
-              src={k.foto_url || '/placeholder.png'} 
+              src={k.foto_url || DEFAULT_AVATAR} 
               alt={k.nama_kepala} 
               className="w-full h-full object-cover" 
             />

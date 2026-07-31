@@ -2,7 +2,15 @@ import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
 // Halaman yang wajib login untuk diakses
-const PROTECTED_PATHS = ['/tambah-keluarga', '/kelola-pengurus', '/admin'];
+const PROTECTED_PATHS = [
+  '/tambah-keluarga',
+  '/import-keluarga',
+  '/kelola-pengurus',
+  '/kelola-berita',
+  '/kelola-galeri',
+  '/dashboard',
+  '/admin',
+];
 // Halaman yang wajib role admin
 const ADMIN_ONLY_PATHS = ['/admin'];
 

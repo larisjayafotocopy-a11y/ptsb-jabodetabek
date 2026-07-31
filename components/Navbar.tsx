@@ -20,9 +20,9 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-6 font-medium">
           <a href="/" className="hover:text-batakGold transition">Beranda</a>
           <a href="/direktori" className="hover:text-batakGold transition">Direktori</a>
-          <a href="/tarombo" className="hover:text-batakGold transition">Tarombo</a>
           <a href="/berita" className="hover:text-batakGold transition">Berita & Ulaon</a>
           <a href="/galeri" className="hover:text-batakGold transition">Galeri</a>
+          <a href="/tentang-kami" className="hover:text-batakGold transition">Tentang Kami</a>
         </div>
 
         {/* Tombol Login/Logout */}
@@ -30,7 +30,7 @@ export default function Navbar() {
           <NavAuthButton />
         </div>
 
-        {/* TOMBOL HAMBURGER - FUNGSI KLIK DIPERBAIKI */}
+        {/* TOMBOL HAMBURGER */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-2xl p-2"
@@ -45,9 +45,9 @@ export default function Navbar() {
           <div className="flex flex-col space-y-4 font-medium">
             <a href="/" className="hover:text-batakGold">Beranda</a>
             <a href="/direktori" className="hover:text-batakGold">Direktori</a>
-            <a href="/tarombo" className="hover:text-batakGold">Tarombo</a>
             <a href="/berita" className="hover:text-batakGold">Berita & Ulaon</a>
             <a href="/galeri" className="hover:text-batakGold">Galeri</a>
+            <a href="/tentang-kami" className="hover:text-batakGold">Tentang Kami</a>
             <NavAuthButton mobile />
           </div>
         </div>

@@ -31,15 +31,8 @@ function LoginForm() {
       return;
     }
 
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', data.user.id)
-      .single();
-
     const redirectTo = searchParams.get('redirectTo');
-    const destination =
-      redirectTo || (profile?.role === 'admin' ? '/kelola-pengurus' : '/tambah-keluarga');
+    const destination = redirectTo || '/dashboard';
 
     router.push(destination);
     router.refresh();

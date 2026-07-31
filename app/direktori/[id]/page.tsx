@@ -7,15 +7,15 @@ export default async function DetailWilayah({ params }: { params: Promise<{ id: 
 
   // Ambil Data Korwil & Pengurus
   const { data: korwil } = await supabase.from('korwil').select('*, pengurus(*)').eq('id', id).single();
-  
+
   // Ambil semua keluarga untuk menghitung statistik
   const { data: keluarga } = await supabase.from('keluarga').select('id, marga_id').eq('korwil_id', id);
-  
+
   // Ambil daftar marga master
   const { data: kategoriMarga } = await supabase.from('kategori_marga').select('*');
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <Link href={`/direktori`} className="text-red-900 font-bold mb-8 block hover:underline">
         ← Kembali
       </Link>
@@ -31,7 +31,7 @@ export default async function DetailWilayah({ params }: { params: Promise<{ id: 
         {kategoriMarga?.map((m: any) => {
           const total = keluarga?.filter(k => k.marga_id === m.id).length || 0;
           return (
-            <Link key={m.id} href={`/direktori/${id}/marga/${m.id}`} 
+            <Link key={m.id} href={`/direktori/${id}/marga/${m.id}`}
               className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:border-red-900 flex justify-between items-center transition-all">
               <span className="font-bold text-gray-800">{m.nama_marga}</span>
               <span className="bg-red-900 text-white px-4 py-1 rounded-full text-sm font-black">{total}</span>

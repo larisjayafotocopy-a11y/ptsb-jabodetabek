@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
+import ImageUpload from '@/components/ImageUpload';
 
 interface Profile {
   role: 'admin' | 'korwil';
@@ -13,12 +14,18 @@ interface Korwil {
   nama_wilayah: string;
 }
 
+interface KategoriMarga {
+  id: number;
+  nama_marga: string;
+}
+
 const initialForm = {
   nama_kepala: '',
   nama_istri: '',
   alamat: '',
-  nomor_telepon: '',
-  marga: 'Sihite Pande Raja',
+  no_telp: '',
+  foto_url: '',
+  marga_id: null as number | null,
   korwil_id: null as number | null,
 };
 
@@ -26,6 +33,7 @@ export default function FormTambahKeluarga() {
   const supabase = createClient();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [korwilList, setKorwilList] = useState<Korwil[]>([]);
+  const [margaList, setMargaList] = useState<KategoriMarga[]>([]);
   const [loadingProfile, setLoadingProfile] = useState(true);
   const [formData, setFormData] = useState(initialForm);
   const [anakList, setAnakList] = useState<string[]>(['']);
@@ -36,6 +44,13 @@ export default function FormTambahKeluarga() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
+      // Daftar marga dibutuhkan admin maupun korwil
+      const { data: margaData } = await supabase
+        .from('kategori_marga')
+        .select('id, nama_marga')
+        .order('nama_marga');
+      setMargaList(margaData || []);
 
       if (!user) {
         setLoadingProfile(false);
@@ -91,6 +106,10 @@ export default function FormTambahKeluarga() {
       alert('Wilayah (korwil) belum ditentukan. Hubungi admin jika ini bukan admin/korwil.');
       return;
     }
+    if (!formData.marga_id) {
+      alert('Marga belum dipilih.');
+      return;
+    }
 
     setSubmitting(true);
 
@@ -99,7 +118,17 @@ export default function FormTambahKeluarga() {
     // 1) Simpan data keluarga dulu, ambil id-nya
     const { data: keluargaBaru, error: keluargaError } = await supabase
       .from('keluarga')
-      .insert([{ ...formData, jumlah_anak: namaAnakValid.length }])
+      .insert([
+        {
+          nama_kepala: formData.nama_kepala,
+          nama_istri: formData.nama_istri,
+          alamat: formData.alamat,
+          no_telp: formData.no_telp,
+          foto_url: formData.foto_url || null,
+          marga_id: formData.marga_id,
+          korwil_id: formData.korwil_id,
+        },
+      ])
       .select('id')
       .single();
 
@@ -119,9 +148,7 @@ export default function FormTambahKeluarga() {
       );
 
       if (anakError) {
-        alert(
-          'Data keluarga tersimpan, tapi data anak gagal disimpan: ' + anakError.message
-        );
+        alert('Data keluarga tersimpan, tapi data anak gagal disimpan: ' + anakError.message);
         setSubmitting(false);
         return;
       }
@@ -173,6 +200,25 @@ export default function FormTambahKeluarga() {
       )}
 
       <div>
+        <label className="text-[10px] font-bold text-gray-400 uppercase">Marga</label>
+        <select
+          required
+          className="w-full p-3 rounded-xl border border-gray-100 mt-1"
+          value={formData.marga_id ?? ''}
+          onChange={(e) => setFormData({ ...formData, marga_id: Number(e.target.value) })}
+        >
+          <option value="" disabled>
+            Pilih marga
+          </option>
+          {margaList.map((m) => (
+            <option key={m.id} value={m.id}>
+              {m.nama_marga}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
         <label className="text-[10px] font-bold text-gray-400 uppercase">Nama Kepala Keluarga</label>
         <input
           type="text"
@@ -207,11 +253,18 @@ export default function FormTambahKeluarga() {
         <label className="text-[10px] font-bold text-gray-400 uppercase">Nomor Telepon</label>
         <input
           type="tel"
-          value={formData.nomor_telepon}
+          value={formData.no_telp}
           className="w-full p-3 rounded-xl border border-gray-100 mt-1"
-          onChange={(e) => setFormData({ ...formData, nomor_telepon: e.target.value })}
+          onChange={(e) => setFormData({ ...formData, no_telp: e.target.value })}
         />
       </div>
+
+      <ImageUpload
+        folder="keluarga"
+        label="Foto Keluarga (opsional)"
+        value={formData.foto_url}
+        onChange={(url) => setFormData({ ...formData, foto_url: url })}
+      />
 
       {/* Daftar Anak — dinamis, bisa tambah/hapus baris */}
       <div>

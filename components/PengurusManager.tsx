@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
+import ImageUpload from '@/components/ImageUpload';
 
 interface Profile {
   role: 'admin' | 'korwil';
@@ -181,13 +182,15 @@ export default function PengurusManager() {
             onChange={(e) => setForm({ ...form, wa: e.target.value })}
             className="p-3 rounded-xl border border-gray-100"
           />
-          <input
-            placeholder="URL Foto (opsional)"
-            value={form.foto_url}
-            onChange={(e) => setForm({ ...form, foto_url: e.target.value })}
-            className="p-3 rounded-xl border border-gray-100"
-          />
         </div>
+
+        <ImageUpload
+          folder="pengurus"
+          label="Foto Pengurus"
+          value={form.foto_url}
+          onChange={(url) => setForm({ ...form, foto_url: url })}
+        />
+
         <div className="flex gap-3">
           <button
             type="submit"

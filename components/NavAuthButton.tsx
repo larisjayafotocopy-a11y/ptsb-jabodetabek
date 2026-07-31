@@ -47,14 +47,23 @@ export default function NavAuthButton({ mobile }: Props) {
   };
 
   const base = mobile
-    ? 'bg-white text-batakRed py-2 rounded-md font-bold w-full'
+    ? 'bg-white text-batakRed py-2 rounded-md font-bold w-full text-center'
     : 'bg-white text-batakRed px-5 py-2 rounded-md font-bold hover:bg-gray-200 transition';
+
+  const dashboardLink = mobile
+    ? 'font-medium hover:text-batakGold'
+    : 'font-medium hover:text-batakGold transition mr-2';
 
   if (loggedIn) {
     return (
-      <button onClick={handleLogout} className={base}>
-        Logout
-      </button>
+      <div className={mobile ? 'flex flex-col gap-3' : 'flex items-center gap-3'}>
+        <a href="/dashboard" className={dashboardLink}>
+          Dashboard
+        </a>
+        <button onClick={handleLogout} className={base}>
+          Logout
+        </button>
+      </div>
     );
   }
 

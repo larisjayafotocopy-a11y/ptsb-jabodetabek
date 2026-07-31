@@ -6,6 +6,16 @@
   --color-batakGold: #fdf0d5;
 }
 
+/* Kunci ruang scrollbar supaya lebar halaman konsisten di semua halaman —
+   mencegah Navbar "geser" saat pindah dari halaman pendek (tanpa scroll)
+   ke halaman panjang (dengan scroll), atau sebaliknya.
+   Dua-duanya dipasang: scrollbar-gutter untuk browser modern,
+   overflow-y:scroll sebagai cadangan yang didukung semua browser. */
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
 /* Pastikan body menggunakan warna default jika perlu */
 body {
   background-color: #f9fafb; /* gray-50 */

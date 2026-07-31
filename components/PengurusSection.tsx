@@ -1,3 +1,5 @@
+import { DEFAULT_AVATAR } from '@/lib/constants';
+
 export default function PengurusSection({ pengurus }: { pengurus: any[] }) {
   const ketua = pengurus.find(p => p.jabatan.toLowerCase().includes('ketua'));
   const sekretaris = pengurus.find(p => p.jabatan.toLowerCase().includes('sekretaris'));
@@ -18,7 +20,7 @@ export default function PengurusSection({ pengurus }: { pengurus: any[] }) {
             <div className="w-16 h-16 md:w-32 md:h-32 rounded-full border-2 border-amber-600 p-0.5 shadow-md flex-shrink-0">
               <div className="w-full h-full rounded-full overflow-hidden border-2 border-red-900">
                 <img 
-                  src={p.foto_url || '/placeholder.png'} 
+                  src={p.foto_url || DEFAULT_AVATAR} 
                   alt={p.nama} 
                   className="w-full h-full object-cover" 
                 />
